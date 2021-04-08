@@ -25,7 +25,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd test/aws/terraform/ec2_role_share_rule/public_and_private_ec2_same_role
+            cd test/aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf
             terraform init -input=false
             terraform plan -out plan.out
       # This persistence is important in order to pass the plan.out to Cloudrail
