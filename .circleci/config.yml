@@ -52,7 +52,7 @@ jobs:
       - cloudrail/scan_terraform_junit:
           cloud-account-id: $AWS_ACCOUNT_ID
           cloudrail_api_key: $CLOUDRAIL_API_KEY
-          plan_output_file: test/aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf/main.tf
+          plan_output_file: test/aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf/plan.out
           tf_directory: test/aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf
           junit-output-file: test_results/cloudrail-junit.xml
       - store_test_results:
