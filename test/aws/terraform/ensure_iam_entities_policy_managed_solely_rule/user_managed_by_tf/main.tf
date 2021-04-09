@@ -8,7 +8,7 @@ resource "aws_iam_user" "user-no-admin" {
 
 resource "aws_iam_user_policy" "policy" {
   name = "inline-policy"
-  user = aws_iam_user.user-1.name
+  user = aws_iam_user.user-no-admin.name
 
   policy = <<EOF
 {
