@@ -2,8 +2,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_iam_user" "user-1" {
-  name = "user-1"
+resource "aws_iam_user" "user-no-admin" {
+  name = "user-no-admin"
 }
 
 resource "aws_iam_user_policy" "policy" {
