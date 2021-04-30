@@ -2,13 +2,13 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_iam_user" "user-1" {
-  name = "user-1"
+resource "aws_iam_user" "read-only-user" {
+  name = "read-only-user"
 }
 
 resource "aws_iam_user_policy" "policy" {
   name = "inline-policy"
-  user = aws_iam_user.user-1.name
+  user = aws_iam_user.read-only-user.name
 
   policy = <<EOF
 {
