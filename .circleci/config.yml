@@ -25,7 +25,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd test/aws/terraform/access_analyzer_validation_rule/iam_multiple_issues
+            cd test/aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf
             terraform init -input=false
             terraform plan -out plan.out
       # This persistence is important in order to pass the plan.out to Cloudrail
@@ -52,8 +52,8 @@ jobs:
       - cloudrail/scan_terraform_junit:
           cloud-account-id: $AWS_ACCOUNT_ID
           cloudrail_api_key: $CLOUDRAIL_API_KEY
-          plan_output_file: test/aws/terraform/access_analyzer_validation_rule/iam_multiple_issues/plan.out
-          tf_directory: test/aws/terraform/access_analyzer_validation_rule/iam_multiple_issues
+          plan_output_file: aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf/plan.out
+          tf_directory: aws/terraform/ensure_iam_entities_policy_managed_solely_rule/user_managed_by_tf
           junit-output-file: test_results/cloudrail-junit.xml
       - store_test_results:
           path: test_results
