@@ -53,7 +53,7 @@ jobs:
           cloud-account-id: $AWS_ACCOUNT_ID
           cloudrail_api_key: $CLOUDRAIL_API_KEY
           plan_output_file: test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/plan.out
-          tf_directory: test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/
+          tf_directory: test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port
           junit-output-file: test_results/cloudrail-junit.xml
       - store_test_results:
           path: test_results
