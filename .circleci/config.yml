@@ -25,7 +25,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/main.tf
+            cd test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/
             terraform init -input=false
             terraform plan -out plan.out
       # This persistence is important in order to pass the plan.out to Cloudrail
