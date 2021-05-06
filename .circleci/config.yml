@@ -25,7 +25,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/
+            cd test/aws/terraform/public_access_db_rds/aurora/vpc-controlled-public/
             terraform init -input=false
             terraform plan -out plan.out
       # This persistence is important in order to pass the plan.out to Cloudrail
@@ -52,8 +52,8 @@ jobs:
       - cloudrail/scan_terraform_junit:
           cloud-account-id: $AWS_ACCOUNT_ID
           cloudrail_api_key: $CLOUDRAIL_API_KEY
-          plan_output_file: test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port/plan.out
-          tf_directory: test/aws/terraform/ecs_entity_expose_port_to_public_connections/ecs_service_expose_port
+          plan_output_file: test/aws/terraform/public_access_db_rds/aurora/vpc-controlled-public/plan.out
+          tf_directory: test/aws/terraform/public_access_db_rds/aurora/vpc-controlled-public
           junit-output-file: test_results/cloudrail-junit.xml
       - store_test_results:
           path: test_results
