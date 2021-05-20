@@ -57,3 +57,28 @@ resource "aws_db_subnet_group" nondefault {
   subnet_ids = [aws_subnet.nondefault_1.id, aws_subnet.nondefault_2.id]
 
 }
+
+resource "aws_rds_cluster" "test" {
+  db_subnet_group_name = aws_db_subnet_group.nondefault.name
+  vpc_security_group_ids = [aws_security_group.nondefault.id]
+  master_username = "asdfasdf"
+  master_password = "asdf1234!!"
+}
+
+resource "aws_rds_cluster_instance" "ins1" {
+  db_subnet_group_name = aws_db_subnet_group.nondefault.name
+  cluster_identifier = aws_rds_cluster.test.id
+  instance_class = "db.r4.large"
+  engine             = aws_rds_cluster.test.engine
+  engine_version     = aws_rds_cluster.test.engine_version
+  publicly_accessible = true
+}
+
+resource "aws_rds_cluster_instance" "ins2" {
+  db_subnet_group_name = aws_db_subnet_group.nondefault.name
+  cluster_identifier = aws_rds_cluster.test.id
+  instance_class = "db.r4.large"
+  engine             = aws_rds_cluster.test.engine
+  engine_version     = aws_rds_cluster.test.engine_version
+  publicly_accessible = true
+}
