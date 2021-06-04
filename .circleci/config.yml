@@ -23,7 +23,9 @@ jobs:
     executor: azure-cli/default
     steps:
       - azure-cli/install
-      - azure-cli/login-with-user
+      - run: 
+          command: |
+            az login -u $AZURE_USERNAME -p $AZURE_PASSWORD
   tf_plan:
     working_directory: /tmp/test_tf
     docker:
