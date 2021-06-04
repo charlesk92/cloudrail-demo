@@ -11,7 +11,9 @@ workflows:
     jobs:
       - login-to-azure
       # Cloudrail requires a Terraform plan as an input, so we must create a plan first.
-      - tf_plan
+      - tf_plan:
+          requires:
+            - login-to-azure
       - security_check_terraform:
           requires:
             - tf_plan
