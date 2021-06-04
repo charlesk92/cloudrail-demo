@@ -3,11 +3,14 @@ version: 2.1
 # For more details about how to use this Orb, please see:
 # https://circleci.com/developer/orbs/orb/indeni/cloudrail
 orbs:
+  azure-cli: circleci/azure-cli@1.1.0
   cloudrail: indeni/cloudrail@1.4.0
 
 workflows:
   main:
     jobs:
+      - azure-cli/install
+      - azure-cli/login-with-user
       # Cloudrail requires a Terraform plan as an input, so we must create a plan first.
       - tf_plan
       - security_check_terraform:
@@ -25,7 +28,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd rds-db
+            cd test/azure/terraform/public_access_sql_database_rule/allow_public_access
             terraform init -input=false
             terraform plan -out plan.out
       # This persistence is important in order to pass the plan.out to Cloudrail
@@ -50,10 +53,10 @@ jobs:
       # Note that Cloudrail has other output formats as well, please see the Orb documentation for more information.
       # Also note that rules that are set to ADVISE (which is the default) will _not_ be included in the output by default.
       - cloudrail/scan_terraform_junit:
-          cloud-account-id: $AWS_ACCOUNT_ID
+          cloud-account-id: $AZURE_ACCOUNT_ID
           cloudrail_api_key: $CLOUDRAIL_API_KEY
-          plan_output_file: rds-db/plan.out
-          tf_directory: rds-db
+          plan_output_file: test/azure/terraform/public_access_sql_database_rule/allow_public_access/plan.out
+          tf_directory: test/azure/terraform/public_access_sql_database_rule/allow_public_access
           junit-output-file: test_results/cloudrail-junit.xml
       - store_test_results:
           path: test_results
