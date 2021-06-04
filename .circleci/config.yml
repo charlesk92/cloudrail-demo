@@ -9,8 +9,7 @@ orbs:
 workflows:
   main:
     jobs:
-      - azure-cli/install
-      - azure-cli/login-with-user
+      - login-to-azure
       # Cloudrail requires a Terraform plan as an input, so we must create a plan first.
       - tf_plan
       - security_check_terraform:
@@ -18,6 +17,11 @@ workflows:
             - tf_plan
 
 jobs:
+  login-to-azure:
+    executor: azure-cli/default
+    steps:
+      - azure-cli/install
+      - azure-cli/login-with-user
   tf_plan:
     working_directory: /tmp/test_tf
     docker:
